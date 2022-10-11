@@ -1,19 +1,20 @@
 const assert = require('assert');
+const { db_config } = require('../db.config');
 const {RateLimitRedis} = require('../lib');
 const RedisClient = require('@node-redis/client/dist/lib/client').default;
 
-const TEST_IP = '192.168.0.1';
+const TEST_IP = '192.168.0.135';
 const TIMEFRAME_SEC = 2;
 const RATE_LIMIT = 100;
 
 describe('Rate Limit Redis Class Test', function() {
 
 	const options = {
-		// redis: {},
+		redis: db_config,
 		timeframe: TIMEFRAME_SEC,
 		limit: RATE_LIMIT,
 		namespace: 'my-rate-limiter:',
-		whitelist: [ '192.168.20.20' ],
+		whitelist: [ '192.168.0.134' ],
 		customRoutes: [
 			{
 				path: '/stingy/rate/limit',

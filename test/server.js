@@ -1,9 +1,11 @@
 const assert = require('assert');
 const {rateLimitRedis} = require('../lib');
+
+const { db_config } = require('../db.config');
 const request = require('supertest');
 const express = require('express');
 
-const TEST_IP = '192.168.0.2';
+const TEST_IP = '192.168.0.135';
 const TIMEFRAME_SEC = 1;
 const RATE_LIMIT = 50;
 const PORT = 10358;
@@ -12,11 +14,24 @@ describe('Rate Limit Redis Server Test', function() {
 	
 	const app = express();
 	
-	const options = {
+	const options = {...{
+		redis: db_config,
+		timeframe: 60,
+		limit: 5,
+		autoConnect: false,
+		customRoutes: [
+		  {
+			path: "/redis-limiter",
+			method: "GET",
+			timeframe: 60,
+			limit: 5,
+		  },
+		],
+	  }, ...{
 		timeframe: TIMEFRAME_SEC,
 		limit: RATE_LIMIT,
 		// headers: true,
-	};
+	}};
 	
 	let server;
 

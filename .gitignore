@@ -47,3 +47,8 @@ node_modules
 *.out
 *.pid
 *.gz
+
+
+# redis configs
+db.config.js
+./db.config.js

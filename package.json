@@ -1,5 +1,5 @@
 {
-    "name": "@jwerre/rate-limit-redis",
+    "name": "@two/rate-limit-redis",
     "version": "1.2.1",
     "description": "A Redis based rate limiter for Node.js and Express.",
     "main": "lib/index.js",
@@ -32,6 +32,8 @@
     },
     "homepage": "https://github.com/jwerre/rate-limit-redis/blob/master/README.md",
     "dependencies": {
+        "node-cache": "^5.1.2",
+        "queue": "^6.0.2",
         "redis": "^4.0.2"
     },
     "devDependencies": {
